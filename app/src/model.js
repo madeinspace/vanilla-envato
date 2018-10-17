@@ -1,38 +1,28 @@
-export default class Model {
+import service from './service.js';
+import { PubSub } from './utils.js';
+import { sortByKey } from './utils.js';
+
+export default class Model extends PubSub{
   constructor() {
-    this.init();
+    super();
     this.data = {};
   }
 
-  init(){
-    this.fetchData().then((data)=>{
-        this.data = data;
-        console.log(this.data);
+  getItems(){
+    service.getItems().then(res => {
+        this.data = res.popular.items_last_three_months;
+        this.trigger('sync');
     }, (error) => {
-        console.log('shit man')
+        console.log('error')
     });
   }
 
-  getItems(){
-
+  removeItemById(id){
+    this.data = this.data.filter(x => x.id !== id);
+    this.trigger('sync');
   }
 
-  fetchData(){
-      return new Promise((resolve, reject) => {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', './src/data.json');
-  
-        xhr.onload = function() {
-          if (xhr.status == 200) {
-            resolve(JSON.parse(xhr.response));
-          } else {
-            reject(Error(xhr.statusText));
-          }
-        };
-        xhr.onerror = function() {
-          reject(Error('Network Error'));
-        };
-        xhr.send();
-      });
+  getData(){
+    return sortByKey(this.data, 'rating');
   }
 }
