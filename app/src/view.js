@@ -12,7 +12,7 @@ export default class View extends PubSub {
 
   bindEvents() {
 
-    // could abstract this and pass the handler trough a wrapper
+    // could abstract this and pass the handler through a wrapper
     const handler = () => {
       const targetElement = event.target;
       const potentialElements = this.app.querySelectorAll('.remove');

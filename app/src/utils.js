@@ -32,8 +32,6 @@ export class PubSub {
     if (!this.messages[message]) {
       return;
     }
-    this.messages[message].forEach(function(listner) {
-      listner(data);
-    });
+    this.messages[message].forEach((listner) => listner(data));
   }
 }

@@ -10,14 +10,14 @@ const fetchData = (type, url, data=null) => {
       }
       xhr.open(type, url);
 
-      xhr.onload = function() {
+      xhr.onload = () => {
         if (xhr.status == 200) {
           resolve(JSON.parse(xhr.response));
         } else {
           reject(Error(xhr.statusText));
         }
       };
-      xhr.onerror = function() {
+      xhr.onerror = () => {
         reject(Error('Network Error'));
       };
       xhr.send(data);

@@ -6,11 +6,11 @@ class App {
   constructor() {
     this.view = new View();
     this.model = new Model();
-    this.controler = new Controller(this.model, this.view)
+    this.controler = new Controller(this.model, this.view);
   }
 
   init() {
-    this.controler.setView();
+    this.controler.start();
   }
 }
 

@@ -17,7 +17,7 @@ export default class Controller {
     this.view.render(this.model.getData());
   }
 
-  setView() {
+  start() {
     this.model.getItems();
   }
 }

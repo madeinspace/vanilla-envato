@@ -10,7 +10,7 @@ export default class Model extends PubSub{
 
   getItems(){
     service.getItems().then(res => {
-        this.data = res.popular.items_last_three_months;
+        this.data = sortByKey(res.popular.items_last_three_months, 'rating');
         this.trigger('sync');
     }, (error) => {
         console.log('error')
@@ -23,6 +23,6 @@ export default class Model extends PubSub{
   }
 
   getData(){
-    return sortByKey(this.data, 'rating');
+    return this.data;
   }
 }
