@@ -14,7 +14,7 @@ const Nav = data => tag`
 <div class="nav">
   <div class="container clearfix">
     <span class="logo"><img src="../../_assets/logo.svg" /></span>
-    <span class="user">Welcome back Fabrice!</span> 
+    <span class="user">Welcome back <strong> Fabrice!</strong></span> 
   </div>
 </div>`;
 
@@ -25,10 +25,19 @@ const Heading = () => tag`
   </div>
 </div>`;
 
+const Teaser = () => tag`
+<span class="teaser">
+Here are this week's most popular themes and templates from <a href="google.com">Themeforest</a>! Grab'em while they're hot!
+</span>
+`
+
 const ItemList = data => tag`
-<ul class="popular-items">
-  ${data.map(item => Item(item))}
-</ul>`;
+<div class="container">
+  ${Teaser()}
+  <ul class="popular-items">
+    ${data.map(item => Item(item))}
+  </ul>
+</div>`;
 
 const Item = data => {
   const { id, url, rating, thumbnail, item } = data;

@@ -10,7 +10,24 @@ export default class Model extends PubSub{
 
   getItems(){
     service.getItems().then(res => {
-        this.data = sortByKey(res.popular.items_last_three_months, 'rating');
+      console.log(res)
+
+      this.data = res.popular.items_last_three_months
+      .map(item => {
+        return{
+          item: item.item,
+          id: item.id,
+          rating: item.rating,
+          thumbnail: item.thumbnail,
+          url: item.url,
+          live_preview_url: item.live_preview_url
+        }
+      })
+      .map(reducedData => {
+        console.log(reducedData)
+        // return sortByKey(reducedData, 'rating');
+      })
+        // this.data = sortByKey(this.data, 'rating');
         this.trigger('sync');
     }, (error) => {
         console.log('error')
