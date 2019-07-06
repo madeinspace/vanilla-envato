@@ -21,17 +21,17 @@ export class PubSub {
     this.messages = {};
   }
 
-  sub(message, callback) {
+  sub(message, listenerFn) {
     if (!this.messages.hasOwnProperty(message)) {
       this.messages[message] = [];
     }
-    this.messages[message].push(callback);
+    this.messages[message].push(listenerFn);
   }
 
   trigger(message, data) {
     if (!this.messages[message]) {
       return;
     }
-    this.messages[message].forEach((listener) => listener(data));
+    this.messages[message].forEach(listner => listner(data));
   }
 }
